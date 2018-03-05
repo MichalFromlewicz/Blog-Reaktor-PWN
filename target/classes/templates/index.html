@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/headerinc :: head"/>
+
+  <body>
+
+    <!-- Navigation -->
+	<header  th:replace="fragments/header :: header"></header>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Clean Blog</h1>
+              <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div th:each="article:${articles}">
+          <div class="post-preview">
+            <a th:href="${'/post/'+ article.id}">
+              <h2 class="post-title" th:text="${article.title}"></h2>
+              <h3 class="post-subtitle" th:text="${article.content}"></h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">Reaktor PWN</a>
+              <span th:text="${article.date}"></span></p>
+          </div>
+		</div>
+          
+             			<!-- Pagination Bar -->
+	<div th:fragment='paginationbar'  class="clearfix">
+		<div>
+			<ul class='pagination pagination-centered'>
+				<li th:class="${page.firstPage}?'disabled':''"><span
+					th:if='${page.firstPage}'>← First</span> <a
+					th:if='${not page.firstPage}'
+					th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a></li>
+				<li th:class="${page.hasPreviousPage}? '' : 'disabled'"><span
+					th:if='${not page.hasPreviousPage}'>«</span> <a
+					th:if='${page.hasPreviousPage}'
+					th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+					title='Go to previous page'>«</a></li>
+				<li th:each='item : ${page.items}'
+					th:class="${item.current}? 'active' : ''"><span
+					th:if='${item.current}' th:text='${item.number}'>1</span> <a
+					th:if='${not item.current}'
+					th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+						th:text='${item.number}'>1</span></a></li>
+				<li th:class="${page.hasNextPage}? '' : 'disabled'"><span
+					th:if='${not page.hasNextPage}'>»</span> <a
+					th:if='${page.hasNextPage}'
+					th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+					title='Go to next page'>»</a></li>
+				<li th:class="${page.lastPage}? 'disabled' : ''"><span
+					th:if='${page.lastPage}'>Last →</span> <a
+					th:if='${not page.lastPage}'
+					th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last
+						→</a></li>
+			</ul>
+		</div>
+	</div>
+          
+
+        </div>
+      </div>
+    </div>
+
+   <!-- Footer -->
+   <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/headerinc :: head"/>
+
+  <body>
+
+    <!-- Navigation -->
+	<header  th:replace="fragments/header :: header"></header>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Clean Blog</h1>
+              <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+<!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <form name="login" th:action="@{/login}" method="post" id="login" >
+          	
+          	<div class="control-group">
+          		<div class="form-group floating-label-form-group controls">
+          			<div th:if="${param.error}">
+          				<div class="alert alert-danger">
+          					Email or password invalid, please verify
+          				</div>
+          			</div>
+          		</div>
+          		
+          		
+          	</div>
+          
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Email Address</label>
+                <input type="email" name="mail" class="form-control" placeholder="Email Address" id="mail" />
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="password" id="pasword" />
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br/>
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+   <!-- Footer -->
+   <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+
+</html>

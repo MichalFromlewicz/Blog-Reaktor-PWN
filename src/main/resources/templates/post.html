@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/headerinc :: head"/>
+
+  <body>
+
+    <!-- Navigation -->
+	<header  th:replace="fragments/header :: header"></header>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1 th:text="${article.title}"></h1>
+              <span class="meta">Posted by
+                <a href="#">Reaktor PWN</a>
+               <span th:text="${article.date}"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p th:text="${article.content}"></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+   <!-- Footer -->
+   <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+
+</html>

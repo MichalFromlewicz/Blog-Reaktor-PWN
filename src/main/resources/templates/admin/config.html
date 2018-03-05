@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/headerinc :: head"/>
+
+  <body>
+
+    <!-- Navigation -->
+	<header  th:replace="fragments/header :: header"></header>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Configuration</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  
+      <!-- Content -->
+    	<div class ="container">
+    		<br />
+    		<br />
+    	
+    		<form th:action="@{/admin/config}" method="post" th:object="${filter}">
+    			<div class="form-group">
+    			Name:<input type="text" th:field="*{name}" placeholder="Name" />
+    			Last name: <input type="text" th:field="*{lastName}" placeholder="Last name" />
+    			Email: <input type="text" th:field="*{email}" placeholder="Email" />
+    			<br/>
+    			<br/>
+    			<button type="submit" class="btn btn-primary">Search</button>
+    			
+    			</div>
+    		
+    		</form>
+    	
+    		<div th:if="${#lists.isEmpty(users)}">Empty list users!</div>
+    		<div th:if="${not #lists.isEmpty(users)}">
+    		<table class="table table-striped">
+    			<tr>
+    				<th>Name</th>
+    				<th>Last Name</th>
+    				<th>Email</th>
+    				<th>Active</th>
+    				<th>Role</th>
+    				<th>View</th>
+    				<th>Edit</th>
+    				<th>Delete</th>
+    			</tr>
+    			<tr th:each="user:${users}">
+    				<td th:text="${user.name}"/>
+    				<td th:text="${user.lastName}"/>
+    				<td th:text="${user.mail}"/>
+    				<td th:text="${user.active}"/>
+    				<td th:text="${user.role.role}"/>
+    				<td><a th:href="${'/users/' +user.id}">View</a> </td>
+    				<td><a th:href="${'/users/edit/' +user.id}">Edit</a> </td>
+    				<td><a th:href="${'/users/delete/' +user.id}">Delete</a> </td>
+    			</tr>
+    		</table>
+    		
+    			<!-- Pagination Bar -->
+	<div th:fragment='paginationbar'>
+		<div>
+			<ul class='pagination pagination-centered'>
+				<li th:class="${page.firstPage}?'disabled':''"><span
+					th:if='${page.firstPage}'>← First</span> <a
+					th:if='${not page.firstPage}'
+					th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a></li>
+				<li th:class="${page.hasPreviousPage}? '' : 'disabled'"><span
+					th:if='${not page.hasPreviousPage}'>«</span> <a
+					th:if='${page.hasPreviousPage}'
+					th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+					title='Go to previous page'>«</a></li>
+				<li th:each='item : ${page.items}'
+					th:class="${item.current}? 'active' : ''"><span
+					th:if='${item.current}' th:text='${item.number}'>1</span> <a
+					th:if='${not item.current}'
+					th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+						th:text='${item.number}'>1</span></a></li>
+				<li th:class="${page.hasNextPage}? '' : 'disabled'"><span
+					th:if='${not page.hasNextPage}'>»</span> <a
+					th:if='${page.hasNextPage}'
+					th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+					title='Go to next page'>»</a></li>
+				<li th:class="${page.lastPage}? 'disabled' : ''"><span
+					th:if='${page.lastPage}'>Last →</span> <a
+					th:if='${not page.lastPage}'
+					th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last
+						→</a></li>
+			</ul>
+		</div>
+	</div>
+    		</div>
+    	</div>
+    
+    
+     <!-- Footer -->
+   <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+
+</html>

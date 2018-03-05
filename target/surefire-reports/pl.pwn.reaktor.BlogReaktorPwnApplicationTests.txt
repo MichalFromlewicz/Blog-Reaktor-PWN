@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: pl.pwn.reaktor.BlogReaktorPwnApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.663 sec - in pl.pwn.reaktor.BlogReaktorPwnApplicationTests

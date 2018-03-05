@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/headerinc :: head"/>
+
+  <body>
+
+    <!-- Navigation -->
+	<header  th:replace="fragments/header :: header"></header>
+	
+	
+	    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Article</h1>
+              <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+	
+	<div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        
+        	<form th:action="@{/post/article}" method="post" th:object="${article}">
+        	<input type="hidden" th:filed="*{id}" />
+        	
+        	<div class="control-group">
+	              <div class="form-group floating-label-form-group controls">
+	                <label>Title</label>
+	                <input type="text" th:field="*{title}" class="form-control" placeholder="Title" id="title" />
+	                <p class="help-block text-danger"></p>
+	              </div>
+	              <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="help-block text-danger"></label>
+	            </div>
+	            
+	            <div class="control-group">
+	              <div class="form-group floating-label-form-group controls">
+	                <label>Content</label>
+	                <textarea rows="40" cols="80" th:field="*{content}"  placeholder="Content" class="form-control" id="content">...</textarea>
+	                <p class="help-block text-danger"></p>
+	              </div>
+	              <label th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="help-block text-danger"></label>
+	            </div>
+	            
+	            <div class="control-group">
+	              <div class="form-group floating-label-form-group controls">
+	                <label>Date</label>
+	                <input type="date" th:field="*{date}" />
+	              </div>
+	              <label th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="help-block text-danger"></label>
+	            </div>
+	            
+	             <div class="control-group">
+	              <div class="form-group controls">
+	                <label>Tags</label>
+	                <ul >
+	                	<li th:each="tag:${allTags}">
+	             			<input type="checkbox" th:field="*{tags}" th:value="${tag.id}" />
+	             			<label th:for="${#ids.prev('tags')}" th:text="${tag.name}"></label>
+	                	</li>
+	                </ul> 
+	              </div>
+	             </div>
+	                    	
+        	<div>
+        		<button type = "submit" class="btn btn-primary" id="subButton">Submit</button>
+        	</div>
+        	
+        	</form>
+        </div>
+      </div>
+     </div>
+        
+	
+	
+	
+	
+	
+   <!-- Footer -->
+   <div th:replace="fragments/footer :: footer"></div>
+
+  </body>
+
+</html>
